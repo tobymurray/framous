@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import path from 'path';
 
+import Frame from './Frame';
+import frameImage from '../images/frame.jpg';
+
 const FRAMES_LIST = [1,2,3,4,5,6,7,8];
 
 export default class Hive extends Component {
@@ -27,24 +30,13 @@ export default class Hive extends Component {
   render () {
     console.log(this.props);
     return (
-      <div>
+      <div style={ { height: "100vh" } } >
         <h1>
           <Link to="/">Back to Hives</Link>
         </h1>
-        <h1>Please select a frame</h1>
-        <ul>{ this.state.frames.map(frame => <li key={frame} style={ { listStyleType: "none" } } onClick={() => this.onFrameSelected(frame)}><Frame /></li>) }</ul>
-        <button onClick={this.onAddFrame}>Add a frame</button>
-        {`Rendering "Hive" ${path.basename(this.props.location.pathname)}`}
+        <ul>{ this.state.frames.map(frame => <li key={frame} style={ { listStyleType: "none", height: "10vh" } } onClick={() => this.onFrameSelected(frame)}><Frame imageSource={frameImage} name={frame}/></li>) }</ul>
+        {/*{`Rendering "Hive" ${path.basename(this.props.location.pathname)}`}*/}
       </div>
     );
   }
-}
-
-
-const Frame = (props) => {
-  return (
-    <div>
-      I'm a frame!
-    </div>
-  );
 }

@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
 import './App.css';
+import Landing from './components/Landing';
+import Hive from './components/Hive';
+import Frame from './components/Frame';
 
 class App extends Component {
   render() {
+    const style = {
+      width: "75%",
+      margin: "0 auto"
+    }
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div style={style}>
+        <Router>
+          <div>
+            <Route exact path="/" component={ Landing } />
+            <Route path="/hive/:hiveId" component={ Hive } />
+            <Route path="/hive/:hiveId/frame/:frameId" component={ Frame } />
+          </div>
+        </Router>
       </div>
     );
   }

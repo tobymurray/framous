@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 import Hives from './Hives';
-import Upload from './Upload'
 
 export default class Landing extends Component {
   render() {

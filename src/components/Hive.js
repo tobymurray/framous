@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import path from 'path';
 
 import Frame from './Frame';
+import FrameDetail from './FrameDetail';
 import frameImage from '../images/frame.jpg';
 
-const FRAMES_LIST = [1,2,3,4,5,6,7,8];
+const FRAMES_LIST = [1, 2, 3, 4, 5, 6, 7, 8];
 
 export default class Hive extends Component {
   constructor() {
     super();
-    this.state = { 
+    this.state = {
       frames: [...FRAMES_LIST],
       selectedFrame: null,
     }
@@ -20,22 +20,54 @@ export default class Hive extends Component {
   }
 
   onAddFrame() {
-    this.setState({ frames: [...this.state.frames, this.state.frames.length+1]})
+    this.setState({ frames: [...this.state.frames, this.state.frames.length + 1] })
   }
 
   onFrameSelected(frame) {
-    console.log("Selected a frame: ", frame);
+    this.setState({
+      selectedFrame: {
+        topImageSource: frameImage,
+        bottomImageSource: frameImage
+      }
+    })
   }
 
-  render () {
-    console.log(this.props);
+  render() {
+    const listStyle = {
+      listStyleType: "none",
+      height: "10vh"
+    }
+    const containerStyle = {
+      display: "flex",
+      height: "100%",
+    };
+
+    const leftPaneStyle = {
+      float: "left"
+    }
+
+    const rightPaneStyle = {
+      float: "right",
+      height: "100%"
+    }
+
     return (
-      <div style={ { height: "100vh" } } >
+      <div style={{ height: "100vh" }} >
         <h1>
           <Link to="/">Back to Hives</Link>
         </h1>
-        <ul>{ this.state.frames.map(frame => <li key={frame} style={ { listStyleType: "none", height: "10vh" } } onClick={() => this.onFrameSelected(frame)}><Frame imageSource={frameImage} name={frame}/></li>) }</ul>
-        {/*{`Rendering "Hive" ${path.basename(this.props.location.pathname)}`}*/}
+        <div style={containerStyle}>
+          <div style={leftPaneStyle}>
+            <ul>{this.state.frames.map(frame =>
+              <li key={frame} style={listStyle}>
+                <Frame onFrameSelected={this.onFrameSelected} frame={frame} imageSource={frameImage} name={frame} />
+              </li>
+            )}</ul>
+          </div>
+          <div style={rightPaneStyle}>
+            <FrameDetail frame={this.state.selectedFrame}/>
+          </div>
+        </div>
       </div>
     );
   }

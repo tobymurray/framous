@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router';
+import { Panel, Grid, Row, Col } from 'react-bootstrap';
 
 import beehive from '../images/hive.png';
 
@@ -8,10 +9,10 @@ const HIVE_LIST = [1, 2, 3]
 export default class Hives extends Component {
   constructor() {
     super();
-    this.state = { 
+    this.state = {
       hives: [...HIVE_LIST],
       hivselectedHivee: null,
-      redirect: false 
+      redirect: false
     }
 
     this.onAddHive = this.onAddHive.bind(this);
@@ -19,13 +20,13 @@ export default class Hives extends Component {
   }
 
   onAddHive() {
-    this.setState({ hives: [...this.state.hives, this.state.hives.length+1]})
+    this.setState({ hives: [...this.state.hives, this.state.hives.length + 1] })
   }
 
   onHiveSelected(hive) {
     console.log("Selected a hive ", hive);
 
-    this.setState({ 
+    this.setState({
       redirect: true,
       selectedHive: hive
     });
@@ -37,11 +38,15 @@ export default class Hives extends Component {
     }
 
     return (
-      <div>
+      <Panel>
         <h1>Please select a hive</h1>
-        <ul>{ this.state.hives.map(hive => <li key={hive} style={ { listStyleType: "none" } } onClick={() => this.onHiveSelected(hive)}><Hive /></li>) }</ul>
+        <Grid>
+            {this.state.hives.map(hive =>
+              <Row onClick={() => this.onHiveSelected(hive)}><Hive /></Row>
+            )}
+        </Grid>
         <button onClick={this.onAddHive}>Add a hive</button>
-      </div>
+      </Panel>
     );
   }
 }
@@ -49,7 +54,7 @@ export default class Hives extends Component {
 const Hive = (props) => {
   return (
     <div>
-      <img src={ beehive } alt="Beehive placeholder"/>
+      <img src={beehive} alt="Beehive placeholder" />
       I'm a hive!
     </div>
   );

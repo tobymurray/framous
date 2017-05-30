@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Thumbnail } from 'react-bootstrap';
 
 export default class Frame extends Component {
   render() {
@@ -9,7 +10,7 @@ export default class Frame extends Component {
     }
 
     const containerStyle = {
-      display: "flex", 
+      display: "flex",
       height: "100%",
       padding: "5px 0"
     };
@@ -19,9 +20,27 @@ export default class Frame extends Component {
     }
 
     const rightPaneStyle = {
-      float: "right", 
+      float: "right",
       height: "100%"
     }
+
+    const thumbnailStyle = {
+      backgroundColor: "black",
+      width: "250px",
+      height: "150px",
+      display: "inline-block", /* makes it fit in like an <img> */
+      backgroundSize: "cover", /* or contain */
+      backgroundPosition: "center center",
+      backgroundRepeat: "no-repeat"
+    }
+
+    const thumbnailContainer = {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%,-50%)"
+    }
+
 
     return (
       <div style={containerStyle} onClick={() => this.props.onFrameSelected(this.props.frame)}>
@@ -29,7 +48,13 @@ export default class Frame extends Component {
           <h2>{this.props.name}</h2>
         </div>
         <div style={rightPaneStyle}>
-          <img style={style} src={this.props.imageSource} alt="Most recent" />
+          <div style={thumbnailStyle}>
+            <div style={thumbnailContainer}>
+
+              <Thumbnail src={this.props.imageSource} alt="Most recent" responsive />
+
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 import Frame from './Frame';
 import FrameDetail from './FrameDetail';
@@ -54,18 +55,20 @@ export default class Hive extends Component {
     return (
       <div style={{ height: "100vh" }} >
         <h1>
-          <Link to="/">Back to Hives</Link>
+          <Link to="/"><Button >Back to Hives</Button></Link>
         </h1>
         <div style={containerStyle}>
           <div style={leftPaneStyle}>
-            <ul>{this.state.frames.map(frame =>
-              <li key={frame} style={listStyle}>
-                <Frame onFrameSelected={this.onFrameSelected} frame={frame} imageSource={frameImage} name={frame} />
-              </li>
-            )}</ul>
+            <ListGroup>
+              {this.state.frames.map(frame =>
+                <ListGroupItem>
+                  <Frame onFrameSelected={this.onFrameSelected} frame={frame} imageSource={frameImage} name={frame} />
+                </ListGroupItem>
+              )}
+            </ListGroup>
           </div>
           <div style={rightPaneStyle}>
-            <FrameDetail frame={this.state.selectedFrame}/>
+            <FrameDetail frame={this.state.selectedFrame} />
           </div>
         </div>
       </div>

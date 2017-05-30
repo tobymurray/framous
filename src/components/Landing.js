@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { PageHeader } from 'react-bootstrap';
 
 import Hives from './Hives';
 
@@ -6,7 +7,7 @@ export default class Landing extends Component {
   render() {
     return (
       <div>
-        <h1>Welcome to BeeHavior Hive Management</h1>
+        <PageHeader>BeeHavior <small>Hive Management Tool</small></PageHeader>
         <Hives />
       </div>
     );
